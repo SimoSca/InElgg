@@ -1,0 +1,25 @@
+utilizzazioni:
+
+
+ELGG
+
+- attualmente ho installato la versione 1.9.7 del 15/12/2014
+- ElggSite è la cartella che ho impostato personalmente: dove elgg salva i dati (cache etc etc)
+
+
+Foowd_Alpha2 (deve rimanere così ed essere esterna all'installazione di elgg)
+
+- api_offerte,
+	che contiene il codice del modulo offerta. All'interno il codice l'ho organizzato secondo questa impostazione
+- mod_elgg,
+	che contiene i plugin per elgg
+- doc,
+	dove metto la documentazione e i tutorial
+
+
+Le estensioni di elgg devono essere poi inserite in <path installazione elg>/mod ad esempiop  /var/www/htdocs/elg/mod/ . 
+e poi attivati dal pannello amministatore elgg.
+
+Il modulo api deve  essere inserito nella root di apache  
+/var/www/htdocs/api_offerte/ 
+per questa installazione vedi il mio tutorial https://github.com/coder-molok/foowd_alpha2/blob/master/doc/tutorial_sviluppo.md

@@ -1,0 +1,13 @@
+{
+  "name": "foowd_api",
+  "version": "1.0.0",
+  "description": "API Foowd lato Server",
+  "author": "Simone Scardoni",
+  "devDependencies": {
+    "composer": "^0.1.2",
+    "expose": "^0.1.4",
+    "grunt": "^0.4.5",
+    "grunt-apidoc": "^0.10.0",
+    "shelljs": "^0.4.0"
+  }
+}

@@ -1,0 +1,48 @@
+<h1>Slim Test of IlNullatore</h1>
+
+<?php
+require 'vendor/autoload.php';
+
+/** 
+ * APILogWriter: Custom log writer for our application
+ *
+ * We must implement write(mixed $message, int $level)
+*/
+class APILogWriter {
+
+	public function write($message, $level = \Slim\Log::DEBUG) {
+
+		# Simple for now
+		echo $level.': '.$message.'<br />';
+
+	}
+
+}
+
+
+
+
+// parte la mia app
+$app = new \Slim\Slim(array(
+		'mode' => 'development',
+		'debug' => true,
+		'log.enabled' => true,
+		'log.level' => \Slim\Log::DEBUG,
+		'log.writer' => new APILogWriter()
+	)
+);
+
+$settingValue = $app->config('templates.path'); //returns "../templates"
+echo $settingValue;
+
+/**
+ * Setup a GET path for /foo
+ */
+$app->get('/users', function() use ($app) {
+
+	# We can render a view
+    $app->render('./template.php');
+
+});
+
+$app->run();

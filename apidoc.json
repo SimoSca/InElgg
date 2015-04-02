@@ -1,5 +1,7 @@
 {
   "name": "Foowd",
-  "version": "0.1.0",
-  "description": "Documentazione API Foowd lato Server"
+  "version": "1.0.0",
+  "description": "Documentazione API Foowd lato Server",
+  "title": "Foowd API",
+  "url": "http://localhost/ElggProject/foowd_alpha2/doc/foowd_api/doc"
 }

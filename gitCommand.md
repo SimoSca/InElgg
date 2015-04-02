@@ -114,10 +114,38 @@ Multiple Branch per Multi Manage
 https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/
 
 git remote add infoowd https://github.com/SimoSca/InFoowd.git
-pusho miaBranch in infoowd
+pusho miaBranch in infoowd:
 git push -u infoowd miaBranch
 
 per il -u vedere tracking branch in http://git-scm.com/book/it/v2/Git-Branching-Remote-Branches
 
-git remote add origin https://github.com/SimoSca/InElgg.git
-git push -u origin master
+#### Aggiungo progetto con Moduli esterni
+
+1. avendo gia' la directory preparata, eseguo
+    ````
+    git remote add origin https://github.com/SimoSca/InElgg.git
+    git push -u origin master
+    ````
+
+1. sul pc di supporto, in **htdocs/** uso `git clone https://github.com/SimoSca/InElgg.git`, e cosi' creo la directory **InElgg**
+2. creo il submodulo scaricandolo nella directory **foowd_alpha2**, grazie al comando `git submodule add https://github.com/SimoSca/InFoowd.git foowd_alpha2`
+    dopo controllo con git status che sia stato greato il file .gitsubmodule e la directory, e faccio un commit, esempio
+    ````
+    git commit -am 'aggiunto submodulo infoowd nella directory foowd_alpha2'
+    ````
+    in ultimo pusho
+3. su uno dei due repo, per praticita', creo un branch isolato che utilizzero' per svolgere commit giornalieri e personali, eseguendo:
+    ````
+    git checkout -b simone-daily master
+    ````
+
+    eseguo qualche lavoro e poi pusho, la prima volta col comando
+    ````
+    git push -u origin simone-daily
+    ````
+
+
+`git branch -vv`, per visualizzare i branch ed i relativi upstream
+`git push origin :<branchName>` per rimuovere il ramo remoto
+
+`git push infoowd master` per pushare master nel repo remoto infoowd

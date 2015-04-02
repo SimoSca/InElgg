@@ -58,9 +58,21 @@ module.exports = function(grunt) {
         }*/
   });
 
+
   // Load the plugin that provides the "apidoc" task.
   grunt.loadNpmTasks('grunt-apidoc');
   grunt.registerTask('apidc', ['apidoc']);
+
+
+  // autoload composer
+  grunt.registerTask('propel-model','propel model:build', function() {
+    var current = shell.pwd();
+    var work = current + '/foowd_alpha2/api_offerte/app';
+    shell.cd(work + "/data"); // relative path, but could be absolute
+    shell.exec(work + '/vendor/bin/propel model:build');
+    shell.cd(current);
+  });
+
 
   // autoload composer
   grunt.registerTask('dump-auto','composer dump-autoload', function() {
@@ -70,9 +82,15 @@ module.exports = function(grunt) {
     shell.cd(current);
   });
 
+
   // default
   grunt.registerTask('default', 'My "default" task description.', function() {
     grunt.log.writeln('Currently running the "default" task.');
   });
+
+
+  // ogni volta eseguo questa azione
+  var myTouch = "type nul >>check-auto-reload.touch & copy check-auto-reload.touch +,,";
+  shell.exec(myTouch);
 
 };

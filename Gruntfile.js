@@ -63,10 +63,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-apidoc');
   grunt.registerTask('apidc', ['apidoc']);
 
+  // custom par
+  var current = shell.pwd();
 
   // autoload composer
   grunt.registerTask('propel-model','propel model:build', function() {
-    var current = shell.pwd();
     var work = current + '/foowd_alpha2/api_offerte/app';
     shell.cd(work + "/data"); // relative path, but could be absolute
     shell.exec(work + '/vendor/bin/propel model:build');
@@ -76,7 +77,6 @@ module.exports = function(grunt) {
 
   // autoload composer
   grunt.registerTask('dump-auto','composer dump-autoload', function() {
-    var current = shell.pwd();
     shell.cd("foowd_alpha2/api_offerte/app"); // relative path, but could be absolute
     shell.exec('composer dump-autoload');
     shell.cd(current);
@@ -84,9 +84,9 @@ module.exports = function(grunt) {
 
 
   // default
-  grunt.registerTask('default', 'My "default" task description.', function() {
-    grunt.log.writeln('Currently running the "default" task.');
-  });
+  //grunt.registerTask('default', 'My "default" task description.', function() {
+  //  grunt.log.writeln('Currently running the "default" task.');
+  //});
 
 
   // ogni volta eseguo questa azione

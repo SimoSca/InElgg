@@ -134,7 +134,7 @@ per il -u vedere tracking branch in http://git-scm.com/book/it/v2/Git-Branching-
     git commit -am 'aggiunto submodulo infoowd nella directory foowd_alpha2'
     ````
     in ultimo pusho
-3. su uno dei due repo, per praticita', creo un branch isolato che utilizzero' per svolgere commit giornalieri e personali, eseguendo:
+3. su uno dei due repo, per praticita', creo un branch isolato che utilizzero' per svolgere commit giornalieri e personali creo la branch simone-daily, eseguendo:
     ````
     git checkout -b simone-daily master
     ````
@@ -149,3 +149,59 @@ per il -u vedere tracking branch in http://git-scm.com/book/it/v2/Git-Branching-
 `git push origin :<branchName>` per rimuovere il ramo remoto
 
 `git push infoowd master` per pushare master nel repo remoto infoowd
+
+4. se voglio creare una branch locale a partire da una remota (da infoowd) 
+    ````
+    git branch <simone-daily-locale> infoowd/simone-daily
+    ````
+
+
+Esempio Completo
+=================
+
+Creating a remote called "github":
+````
+git remote add github git://github.com/jdoe/coolapp.git
+git fetch github
+````
+
+List all remote branches:
+````
+git branch -r
+  github/gh-pages
+  github/master
+  github/next
+  github/pu
+````
+
+Create a new local branch (test) from a github's remote branch (pu):
+````
+git branch test github/pu
+git checkout test
+````
+
+Merge changes from github's remote branch (pu) with local branch (test):
+````
+git fetch github
+git checkout test
+git merge github/pu
+````
+
+Update github's remote branch (pu) from a local branch (test):
+````
+git push github test:pu
+````
+
+Creating a new branch on a remote uses the same syntax as updating a remote branch. For example, create new remote branch (beta) on github from local branch (test):
+````
+git push github test:beta
+````
+
+Delete remote branch (pu) from github:
+````
+git push github :pu
+````
+
+`git diff origin master`, mostra le differenze tra origin e master, per meglio dire le operazioni che svolgerebbe col comando 
+`git merge origin`, qualora sia sulla branch master. Il primo comando puo' essere piu brevemente `git diff origin`
+

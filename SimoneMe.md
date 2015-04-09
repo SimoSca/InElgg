@@ -53,3 +53,39 @@ per questa installazione vedi il mio tutorial https://github.com/coder-molok/foo
         mklink /D foowd_theme C:\wamp\www\ElggProject\foowd_alpha2\mod_elgg\foowd_theme
 
 
+
+# works
+
+###Utenti
+modificare
+
+creare - fatto
+eliminare - fatto
+
+###Offerte
+limite e offset - fatto
+ricerca offerte, per tag , per data, - fatto
+ordinamento prezzo, data - fatto
+quali e in che ordine - fatto
+filtri produttore data stato tag - fatto
+
+
+###Ordini
+
+
+###Gruppi
+
+###Preferenze
+elenco preferenze di un utente - fatto
+elenco preferenze sull'ordine - fatto
+
+aggiungi preferenza - fatto
+aggiornare - fatto
+rimuovere - fatto
+
+
+
+###Tags
+descrizione 
+nome - fatto
+

@@ -42,9 +42,9 @@ per questa installazione vedi il mio tutorial https://github.com/coder-molok/foo
 
 - Per rendere il path piu pulito e non dover copiare e incollare in seguito a cambiamenti nella branch origin/master del progetto, creo direttamente dei link simbolici (per fare in modo che il server riesca a leggerli come directory).
 
-    - da www
+    - da www/
     
-        mklink /D api_offerte ElggProject\foowd_alpha2\api_offerte
+        mklink /D api_foowd ElggProject\foowd_alpha2\api_foowd
 
     - da elgg.../mod
     
@@ -88,4 +88,26 @@ rimuovere - fatto
 ###Tags
 descrizione 
 nome - fatto
+
+
+
+altro plugin foowd_utenti:
+==========================
+
+gestione utenti e gruppi
+
+
+hook registrazione utente
+interfaccia personalizzata foowd_utente e gruppo - pannello utente
+    attributo produttore
+
+aggiunta metadati a entita' utente relativa ai progetto 
+
+
+
+
+altro plugin foowd_utenti:
+==========================
+capogruppo, offerte, etc.
+
 

@@ -38,7 +38,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     apidoc: {
       myapp: {
-        src: "foowd_alpha2/api_offerte/app/routes",
+        src: "foowd_alpha2/api_foowd/app/routes",
         dest: "foowd_alpha2/doc/foowd_api/doc"
       }
     },
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 
   // autoload composer
   grunt.registerTask('propel-model','propel model:build', function() {
-    var work = current + '/foowd_alpha2/api_offerte/app';
+    var work = current + '/foowd_alpha2/api_foowd/app';
     shell.cd(work + "/data"); // relative path, but could be absolute
     shell.exec(work + '/vendor/bin/propel model:build');
     shell.cd(current);
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
 
   // autoload composer
   grunt.registerTask('dump-auto','composer dump-autoload', function() {
-    shell.cd("foowd_alpha2/api_offerte/app"); // relative path, but could be absolute
+    shell.cd("foowd_alpha2/api_foowd/app"); // relative path, but could be absolute
     shell.exec('composer dump-autoload');
     shell.cd(current);
   });

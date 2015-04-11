@@ -9,5 +9,10 @@
     "grunt": "^0.4.5",
     "grunt-apidoc": "^0.10.0",
     "shelljs": "^0.4.0"
-  }
+  },
+  "//": [
+        "Per rendere automatici alcuni script di grunt e' necessario che sia installato globalmente grunt-cli:",
+        "npm install -g grunt-cli"
+        ],
+  "//": "Per funzionare devo aver installato nodejs"
 }

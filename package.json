@@ -8,11 +8,10 @@
     "expose": "^0.1.4",
     "grunt": "^0.4.5",
     "grunt-apidoc": "^0.10.0",
+    "grunt-jsdoc": "^0.5.8",
+    "grunt-phpdocumentor": "file:..\\..\\..\\Users\\Keltron\\AppData\\Local\\Temp\\npm-14504-2eca6b82\\git-cache-967a8e0f13fa\\b9da83a75aca088a7a991914d9253f0632be0fd8",
     "shelljs": "^0.4.0"
   },
-  "//": [
-        "Per rendere automatici alcuni script di grunt e' necessario che sia installato globalmente grunt-cli:",
-        "npm install -g grunt-cli"
-        ],
-  "//": "Per funzionare devo aver installato nodejs"
+  "//": "Per funzionare devo aver installato nodejs",
+  "//": "grunt-phpdocumentor e' un fork che ha implementato l'opzione ignore"
 }

@@ -1,0 +1,3 @@
+In questa directory sono raccolte alcune spiegazioni di Git molto utili per non finire in futili errori.
+
+Alcuni sono tratti da forum.

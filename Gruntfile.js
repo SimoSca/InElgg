@@ -34,6 +34,14 @@ module.exports = function(grunt) {
   // to execute shell command
   var shell = require('shelljs');
   var fs    = require('fs');
+  
+  // custom par
+  var current = shell.pwd()+'/';
+  var foowd = current+'foowd_alpha2/api_foowd/';
+  var appDir = foowd + 'app/';
+  var dataDir = appDir + 'data/';
+  var propelExec = appDir + 'vendor/bin/propel'; // command, not directory
+  var modDir = current+'foowd_alpha2/mod_elgg/';
 
   // Project configuration.
   grunt.initConfig({
@@ -43,33 +51,33 @@ module.exports = function(grunt) {
         dest: "foowd_alpha2/doc/foowd_api/doc"
       }
     },
+    jsdoc : {
+            dist : {
+                src: [modDir+'*'],
+                options: {
+                    destination: 'doc/js/',
+                    recurse: true
+                } 
+                //jsdoc: "./node_modules/bin/jsdoc"
+            }
+    },
+    phpdocumentor: {
+           dist: {
+               options: {
+                   target : 'doc/php/',
+                   directory : [modDir, foowd],
+                   ignore: ['foowd_theme/', 'vendor/', 'data/generated-*']
+               }
+           }
+       }
     /*composer : {
       options : {
         usePhp: true,
         cwd: "foowd_alpha2/api_offerte/app"
       }
-    },
-    bgShell: {
-          _defaults: {
-            bg: true
-          },
-          gruntComposer: {
-            cmd: 'grunt composer:dump-autoload'
-          }
-        }*/
+    }*/
   });
 
-
-  // Load the plugin that provides the "apidoc" task.
-  grunt.loadNpmTasks('grunt-apidoc');
-  grunt.registerTask('apidc', ['apidoc']);
-
-  // custom par
-  var current = shell.pwd()+'/';
-  var foowd = current+'foowd_alpha2/api_foowd/';
-  var appDir = foowd + 'app/';
-  var dataDir = appDir + 'data/';
-  var propelExec = appDir + 'vendor/bin/propel';
 
   var PathExec = function(path, exec){ // path absolute
     shell.cd(path);
@@ -95,6 +103,7 @@ module.exports = function(grunt) {
     //var work = foowd+'app/';
     shell.cd(appDir + "data/"); // relative path, but could be absolute
     shell.exec(propelExec +' model:build');
+    grunt.task.run('dump-auto');
     shell.cd(current);
   });
 
@@ -103,6 +112,14 @@ module.exports = function(grunt) {
   grunt.registerTask('dump-auto','composer dump-autoload', function() {
     shell.cd(appDir); // relative path, but could be absolute
     shell.exec('composer dump-autoload');
+    shell.cd(current);
+  });
+
+
+  // composer foowd_theme
+  grunt.registerTask('theme-install','runs composer install inside foowd_theme', function() {
+    shell.cd(modDir+'foowd_theme/'); // relative path, but could be absolute
+    shell.exec('composer install');
     shell.cd(current);
   });
 
@@ -126,6 +143,17 @@ module.exports = function(grunt) {
     //PathExec(appDir, 'composer install');
     PathExec(appDir, 'composer dump-autoload');
   });  
+
+  // Load the Dcoumentation plugins.
+  grunt.loadNpmTasks('grunt-apidoc');
+  //grunt.registerTask('apidc', ['apidoc']);
+  grunt.loadNpmTasks('grunt-jsdoc');
+  //grunt.registerTasks('jsdc', ['jsdoc']);
+  grunt.loadNpmTasks('grunt-phpdocumentor');
+  //grunt.registerTasks('phpdc', ['phpdocumentor']);
+  
+  grunt.registerTask('doc', ['apidoc', 'jsdoc', 'phpdocumentor']);
+
 
 
   // default

@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0; padding:0;}
+body{ font-family:Arial, Helvetica, sans-serif; font-size:11px; padding:30px;}
+
+/* elementi generici */
+textarea, input, select{ font-family:Arial, Helvetica, sans-serif; font-size:11px;}
+.clear{ clear:both; height:0px;}
+.input{ background:#F6F6ED;}
+
+#istruzioni{ float:left; width:100%; margin-bottom:30px;}
+.blocco{ float:left; width:180px; font-size:11px; margin-bottom:10px;}
+	.blocco .nome_campo{ font-weight:bold; font-size:12px;}
+#map{ float:left; width:100%; height:350px; margin:30px 0px 30px 0px;}

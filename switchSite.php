@@ -102,24 +102,24 @@ function switchTest($version, $db, $CONFIG){
 
   // change installation path
   $sql[0] = "UPDATE {$CONFIG->dbprefix}datalists
-     SET value = 'C:/wamp/www/ElggProject/elgg-{$version}/'
+     SET value = 'C:/wamp/www/ElggProject/{$version}/'
      WHERE name = 'path'";
   
   // change the data directory
   $sql[1] = "UPDATE {$CONFIG->dbprefix}datalists
-     SET value = 'C:/wamp/www/ElggProject/elgg-{$version}-data/'
+     SET value = 'C:/wamp/www/ElggProject/{$version}-data/'
      WHERE name = 'dataroot'";
 
   // change the site url
   $sql[2] = "UPDATE {$CONFIG->dbprefix}sites_entity
-     SET url = 'http://localhost/ElggProject/elgg-{$version}/'";
+     SET url = 'http://localhost/ElggProject/{$version}/'";
 
   // about data directory:
   // if doesn't exists, than elgg recreate this!
   
   //change the filestore data directory
   $sql[3] = "UPDATE {$CONFIG->dbprefix}metastrings
-    SET string = 'C:/wamp/www/ElggProject/elgg-{$version}-data/'
+    SET string = 'C:/wamp/www/ElggProject/{$version}-data/'
     WHERE id = (
        SELECT value_id
        FROM {$CONFIG->dbprefix}metadata
@@ -169,7 +169,7 @@ if(isset($vers)){
           if(timeLeft === 0){
               clearInterval(cinterval);
               // nota il codice php dentro alla stringa!
-              location.href = "http://localhost/ElggProject/elgg-<?php echo $vers ?>/upgrade.php";
+              location.href = "http://localhost/ElggProject/<?php echo $vers ?>/upgrade.php";
           }
       };
 
@@ -179,14 +179,21 @@ if(isset($vers)){
   
   <?php
 }else{
+  $elgg = array();
+  foreach (new DirectoryIterator('./') as $f) {
+      if(!$f->isDir() || $f->isDot()) continue;
+      if(preg_match('@elgg-.*(?<!data)$@i', $f->getFilename())){
+        // echo $f->getFilename() . "<br>\n";
+        array_push($elgg, $f->getFilename());
+      } 
+  }
 ?>
   <div id="response">Da qui puoi impostare una versione di Elgg</div>
   <!-- with type button, I can multiple select, but is inconsistent with my purpose -->
   <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
   <fieldset>
     <legend>Sceli la versione da impostare nel DB di Elgg</legend>
-        <input type="radio" name="version" value="1.9.7"/>1.9.7 <br/>
-        <input type="radio" name="version" value="1.10.3"/>1.10.3<br/>
+      <?php foreach($elgg as $value) echo  "<input type=\"radio\" name=\"version\" value=\"$value\"/>$value<br/>\n\r";?>
     <input type="submit">
   </fieldset>
   </form>

@@ -139,8 +139,44 @@ Links utili:
 per automatizzare questo processo ho creato il file **switchSite.php**.
 E' da notare che Elgg, qualora non sia gia' esistente, crea automaticamente la directory **elgg-versio-data**, che ho impostato come director di *cache* e di *files* (come icone).
 
- 
+
+#### Come metodo alternativo alla Duplicazione
+
+1. Ho creato un database `fake`
+2. a tale DB ho assegnato un utente `fake` con pwd `99fake` e su questo DB gli ho garantito tutti i privilegi
+3. Ho svolto la normale creazione di Elgg sfruttando i dati del punto 1 e 2
+4. per impostare al DB e all'utente di Default ho usato `switchSite.php`
+5. rimodificare i dati in `Engine/config.php`, riportandoli al DB reale
+
+In questo modo ho potuto evitare i copia e incolla del passaggio `Specifiche`.
+
+
+
+Specifiche
+===========
+
+- Le estensioni di elgg devono essere poi inserite in <path installazione elg>/mod ad esempio  /var/www/htdocs/elg/mod/ , 
+e poi attivati dal pannello amministatore elgg.
+
+- Il modulo api deve  essere inserito nella root di apache  
+/var/www/htdocs/api_offerte/ 
+per questa installazione vedi il mio tutorial https://github.com/coder-molok/foowd_alpha2/blob/master/doc/tutorial_sviluppo.md
+
+- Per rendere il path piu pulito e non dover copiare e incollare in seguito a cambiamenti nella branch origin/master del progetto, creo direttamente dei link simbolici (per fare in modo che il server riesca a leggerli come directory).
+
+    - da www/
     
+        mklink /D api_foowd ElggProject\foowd_alpha2\api_foowd
+
+    - da elgg.../mod
+    
+        mklink /D foowd_offerte C:\wamp\www\ElggProject\foowd_alpha2\mod_elgg\foowd_offerte
+
+        comando globale in dos:
+        ````
+        mklink /D foowd_offerte C:\wamp\www\ElggProject\foowd_alpha2\mod_elgg\foowd_offerte && mklink /D foowd_theme C:\wamp\www\ElggProject\foowd_alpha2\mod_elgg\foowd_theme && mklink /D foowd_utility C:\wamp\www\ElggProject\foowd_alpha2\mod_elgg\foowd_utility && mklink /D foowd_utenti C:\wamp\www\ElggProject\foowd_alpha2\mod_elgg\foowd_utenti
+        ````
+  
 
 
 Caricare Elgg engine

@@ -14,7 +14,6 @@ Rivedere registrazione e mail
 rivedere .htaccess e parametro api del plugin.
 
 
-scrivere errore
 
 
 

@@ -1,6 +1,21 @@
 Appunti su Elgg
 ===============
 
+Prima di iniziare...
+--------------------
+
+Qui raccolgo links che potrebbero essere utili al sottoscritto... 
+
+### Pagine Chiave
+
+- profile -> vedi modulo profile | bloccare il modulo del profilo
+- settings e settings/user
+- admin
+- login
+- register
+
+
+
 Elgg Page
 ---------
 

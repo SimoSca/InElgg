@@ -5,6 +5,8 @@ elgg-*/
 
 *vendor/
 
+OfferImg/
+
 # lo escludo in quanto posso direttamente editarla dal repo foowd_alpha, oppure da InFoowd
 foowd_alpha2/
 /nbproject/private/

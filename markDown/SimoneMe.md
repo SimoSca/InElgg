@@ -118,4 +118,91 @@ Ora avviene l'implementazione del gruppo e di come gli utenti possano comunicare
 - controllo origine , externalid 
 
 
+Nei miei ultimi commit ho migliorato l'opzione "ExternalId" nella richiesta "search" di "Offers", che permette di "attaccare" a ciascuna offerta che matcha la search, le eventuali preferenze espresse dagli utenti elencati nella "ExternalId" (vedere documentazione o file di postman aggiornato).
 
+ color: #3b5998
+ &::before
+     content: unquote("\"\\#{$icon-facebook2}\"")
+
+
+
+prefer, errore su Publisher e togliere UserId
+    offer: stessi del wall
+
+
+
+in
+foowd_theme
+
+install-first di shell
+
+
+git pull,
+
+eventualmente merge
+
+lavoro
+git commit
+git push
+
+
+
+Stai usando plugin elgg e il profile?
+
+volevo rifare la pagina profilo.
+
+- dal profilo mandare all'elenco delle proprie offerte
+- dal profilo andare alla pagina per cambiare i propri dati e immagini
+
+
+akkuradbold
+
+
+esterndere uservalidationbyemail/emailsent
+
+curare i messaggi d'errore
+
+status offerte
+
+quali dati l'utente puo' modificare? ad esempio se offerente....
+
+campo temp
+
+
+
+1 - attivare e testare API con DB
+2 - installare elgg
+3 - copiare tutti i plugin e impostare i giusti permessi
+4 - nei settings dei plugin impostare il giusto servizio API
+5 - ora si puo' iniziare a usare
+
+
+
+profile-gallery
+id utente json con path relativo a offerImg
+
+
+personalizzare gallery
+
+
+
+
+rinominare OfferImg in FoowdStorage
+php adjustTree.php in FoowdStorage
+path:
+use-..../
+        /offers
+        /profile
+        /avatar
+
+        {
+            "ExternalId":"722"
+        }
+
+
+messaggi popup
+
+php warning il foowd offerte in ogni single delle offerte
+
+
+rimuovere page e css da default di foowd utility

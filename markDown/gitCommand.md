@@ -49,6 +49,11 @@ Comandi Utili
 - rimuovere dall'area di stage una directory intera
     git reset <directory>
 
+- pushare la branch locale **master** nella remota **simone-daily** associata a **infoowd**
+    git push infoowd master:simone-daily
+
+
+
 
 # Mia procedura:
 

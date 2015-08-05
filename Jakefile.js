@@ -48,22 +48,32 @@
 // }
 
 
+function baseName(str){
+   var base = new String(str).substring(str.lastIndexOf('/') + 1); 
+    if(base.lastIndexOf(".") != -1)       
+        base = base.substring(0, base.lastIndexOf("."));
+   return base;
+}
+
 // default - dipende da target.bower, e se questo risulta piu recente di source.bower,
 // allora gli faccio eseguire la task di bower.
 
 desc("start default, that is load config.php and touch a check file");
-task('default', [/*target.bower*/], function (params) {
-  
-  var cmds = [
+task('default', [/*target.bower*/], function (ext, file) {
+
+	var cmds = [];
+	
+	if(ext === 'sass') cmds.push('sass --style expanded --compass '+file+ ' '+baseName(file)+'.css');
+  if(ext === 'styl') cmds.push('stylus -u nib '+file+ ' '+baseName(file)+'.styl');
+	// console.log(cmds[0]);
+
   	//"php config.php",
   	//'echo "ora genero il file per il check di auto-reload"',
-  	"type nul >>check-auto-reload.touch & copy check-auto-reload.touch +,,"
-  ];
+	cmds.push("type nul >>check-auto-reload.touch & copy check-auto-reload.touch +,,");
 
   jake.exec(cmds, {interactive: true}, function () {
     complete();
   });
-
 });
 
 

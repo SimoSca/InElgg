@@ -1,0 +1,26 @@
+1) ricapitolando: in sostanza api offerte e' un modulo di supporto che deve
+essere richiamato da i moduli elgg che implementiamo?
+2) il modulo api-offerte ha principalmente una funzione di gestione autonoma?
+
+cosa intende con preferenza?
+
+Interazioni con elgg:
+
+- hook x stoccaggio dei dati, degli id, e verifica del login?
+
+- l'utente esiste gia', si deve loggare?
+
+la gui
+
+
+
+
+
+
+
+produttore offre
+
+la gente ok 
+
+- i moduli sono attivati di default? quindi uno si iscrive e il modulo gli viene attivato in automatico?
+

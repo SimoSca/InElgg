@@ -1,0 +1,16 @@
+{
+  "name": "foowd_api",
+  "version": "1.0.0",
+  "description": "API Foowd lato Server",
+  "author": "Simone Scardoni",
+  "devDependencies": {
+    "composer": "^0.1.2",
+    "expose": "^0.1.4",
+    "grunt": "^0.4.5",
+    "grunt-apidoc": "^0.10.0",
+    "grunt-jsdoc": "^0.5.8",
+    "grunt-phpdocumentor": "file:..\\..\\..\\..\\Users\\black\\AppData\\Local\\Temp\\npm-14504-2eca6b82\\git-cache-967a8e0f13fa\\b9da83a75aca088a7a991914d9253f0632be0fd8",
+    "shelljs": "^0.4.0"
+  },
+  "//": "grunt-phpdocumentor e' un fork che ha implementato l'opzione ignore"
+}

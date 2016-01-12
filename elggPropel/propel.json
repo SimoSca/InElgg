@@ -1,0 +1,29 @@
+{
+    "propel": {
+        "database": {
+            "connections": {
+                "bookstore": {
+                    "adapter": "mysql",
+                    "classname": "Propel\\Runtime\\Connection\\ConnectionWrapper",
+                    "dsn": "mysql:host=localhost;dbname=elg-test-propel",
+                    "user": "root",
+                    "password": "kogamysql",
+                    "attributes": [],
+              "settings":{
+                  "charset": "utf8",
+                      "queries":{
+              "utf8": "SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci" }
+            }
+                }
+            }
+        },
+        "runtime": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        },
+        "generator": {
+            "defaultConnection": "bookstore",
+            "connections": ["bookstore"]
+        }
+    }
+}

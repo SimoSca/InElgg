@@ -1,0 +1,17 @@
+/media/sf_ElggProject/onSave.sh
+/media/sf_ElggProject/
+onSave.sh
+
+$this->Host = "smtp.gmail.com";
+//Set this to true if SMTP host requires authentication to send ethis
+$this->SMTPAuth = true;                          
+//Provide username and password     
+$this->Username = "test.foowd@gmail.com";                 
+$this->Password = "casellaDiTest";                           
+//If SMTP requires TLS encryption then set it
+$this->SMTPSecure = "tls";                           
+//Set TCP port to connect to 
+$this->Port = 587;                                   
+
+$this->From = "test.foowd@gmail.com";
+$this->FromName = "Sito Foowd";

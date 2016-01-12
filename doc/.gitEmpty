@@ -1,0 +1,2 @@
+File di default per salvare la directory e basta, anche se presente in .gitignore.
+Per farlo devo aggiungere esplicitamente al commit il presente file in modalita' force, cosi' che git sia obbligato a salvare questo file fitizio.

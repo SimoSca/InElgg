@@ -2,6 +2,7 @@
 console.log('start create symlinks')
 
 // to execute shell command
+// 
 var shell = require('shelljs');
 var fs    = require('fs');
 
@@ -68,10 +69,11 @@ function setModDirs (dir){
     var files = fs.readdirSync(dir);
     for (var i in files){
 
-        var src = dir +  files[i];
+      var src = dir +  files[i];
     	var dest = destDir + files[i];
-
-        if (fs.statSync(src).isDirectory() && !fs.statSync(dest).isDirectory() && src!==dir ){
+      // console.log('Src: ' + src);
+      // console.log('Dst: ' + dest);
+      if (fs.statSync(src).isDirectory() && !fs.statSync(dest).isDirectory() && src!==dir ){
     		// console.log(src)
     		// console.log(dest)
     		// creo i files
@@ -79,7 +81,7 @@ function setModDirs (dir){
             console.log('\n### Comando eseguito:');
     		console.log(cmd)
     		shell.exec(cmd)
-        }
+       }
     }
     // return files_;
 }

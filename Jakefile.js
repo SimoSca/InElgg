@@ -63,14 +63,62 @@ task('default', [/*target.bower*/], function (ext, file) {
 
 	var cmds = [];
 
+  var executed = false;
 	
-	if(ext === 'sass') cmds.push('sass --style expanded --compass '+file+ ' '+baseName(file)+'.css');
-  if(ext === 'styl') cmds.push('stylus -u nib '+file/*+ ' '+baseName(file)+'.css'*/);
-  if(ext === 'coffee') cmds.push('coffee -c '+file/*+ ' '+baseName(file)+'.css'*/);
-	
-  //"php config.php",
-  // qui cmds potrebbe venire modificato
-  vpsSync(ext, file, cmds);
+	if(ext === 'sass'){
+    cmds.push('sass --style expanded --compass '+file+ ' '+baseName(file)+'.css');
+    vpsSync(ext, file, cmds);
+  } 
+  if(ext === 'styl'){
+    if(file.match(/\\mod_elgg\\foowd_utenti\\css\\/gi)){
+      // sostituisco il file con quello di default
+      file = file.replace(/[^\\]+$/gi, 'foowd-utenti.styl');
+      cmds.push('stylus -u nib '+file/*+ ' '+baseName(file)+'.css'*/);
+      vpsSync(ext, file, cmds);
+      executed = true;
+    }
+    if(file.match(/\\mod_elgg\\foowd_offerte\\css\\/gi)){
+      // sostituisco il file con quello di default
+      file = file.replace(/[^\\]+$/gi, 'foowd_offerte.styl');
+      cmds.push('stylus -u nib '+file/*+ ' '+baseName(file)+'.css'*/);
+      vpsSync(ext, file, cmds);
+      executed = true;
+    }
+  }
+  if(ext === 'coffee'){
+    cmds.push('coffee -c '+file/*+ ' '+baseName(file)+'.css'*/);
+    vpsSync(ext, file, cmds);
+    executed = true;
+  } 
+    
+
+  var hbrsPath =  'C:\\xampp\\htdocs\\www\\ElggProject\\foowd_alpha2\\mod_elgg\\foowd_theme\\pages\\templates\\';
+  if(ext === 'handlebars'){
+    file = hbrsPath+'templates-amd.js';
+    console.log(file)
+    cmds.push('python handlebars.py');
+    vpsSync(ext, file, cmds);
+    executed = true;
+  } 
+  if(file.match(/\\mod_elgg\\foowd_theme\\lib\\css\\styl\\/gi)){
+    console.log(file)
+    var base = file.split('\\');
+    var baseName = base[base.length-1].replace(/\.styl/, '')
+    var re = new RegExp('styl\\\\'+baseName+'.styl'); 
+    file2 = file.replace(re, 'partials\\'+baseName+'.css');
+    console.log(file2)
+    baseDir = file.replace(re, '' );
+    var cmdl = []
+    cmdl.push('stylus -u nib -u jeet -u rupture '+ file + ' -o ' + file2);
+    cmdl.push('python template-style.py')
+    // jake.exec(cmdl, {interactive: true}, function () {});
+    file = baseDir + 'style.css';
+    vpsSync(ext, file, cmdl);
+    executed = true;
+  }
+
+  if(!executed) vpsSync(ext, file, cmds);
+  
   //'echo "ora genero il file per il check di auto-reload"',
 
   var cmd = ["type nul >>check-auto-reload.touch & copy check-auto-reload.touch +,,"];

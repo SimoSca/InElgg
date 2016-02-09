@@ -1,26 +1,114 @@
-1) ricapitolando: in sostanza api offerte e' un modulo di supporto che deve
-essere richiamato da i moduli elgg che implementiamo?
-2) il modulo api-offerte ha principalmente una funzione di gestione autonoma?
+Cerco github bot e avvio
+/connect e clicco link -> schermate di autorizzazione su github
 
-cosa intende con preferenza?
+riquadro [/] sulla riga di scrittura messaggio
+/newintegrations -> seleziono repository
 
-Interazioni con elgg:
-
-- hook x stoccaggio dei dati, degli id, e verifica del login?
-
-- l'utente esiste gia', si deve loggare?
-
-la gui
+poi decido se aggiungere il bot a un gruppo (ad esempio il nostro di foowd) o ricevere messaggi privati
 
 
+Purtoppo questo cambiamento non funziona:
+
+quando la pagina viene ad essere caricata vengono automaticamente caricati degli script che in qualche modo 
+
+
+{
+"response":true,
+"body":[
+{"Id":29,"Name":"Bacche di ginepro","Description":"<p>testo<\/p>","Publisher":85,"Price":3,"Minqt":15,"Maxqt":1000,"Quota":70,"Unit":"grammi","UnitExtra":"vasetto","Created":"2015-09-18 10:04:12","Modified":"2015-09-18 10:04:12","Expiration":null,"State":null,"totalQt":0,"prefer":null,"Tag":""},
+{"Id":30,"Name":"Bagoss","Description":"<p>La tradizione designa con lo stesso termine &quot;bagoss&quot; il pi&ugrave; famoso e diffuso prodotto della zona: un formaggio stagionato dal gusto robusto che si &egrave; meritato l&#39;appellativo di qrana bresciano. Nei mesi estivi l&#39;allevamento si trasferisce sui pascoli delle montagne circostanti e la trasformazione del latte in bagoss avviene nelle malghe, secondo il metodo tradizionale e utilizzando gli antichi strumenti artiqianali in leno e rame. La crosta liscia leggermente dura viene unta durante la stagionatura con olio di lino crudo, per mantenerla elastica e limitare la formazione di muffe sgradite. La pasta &egrave; di color giallo paglierino, a tessitura granulosa e leggermente occhiata. Il sapore &egrave; caratteristico, decisamente aromatico, ma non piccante. Come formaggio da tavola il bagoss viene servito a scaglie come il grana o arrostito sulla piastra, ma se ben stagionato &egrave; anche ottimo da grattugia.Formaggio a pasta semicotta, prodotto con latte di vacca, parzialmente scremato per affioramento; salatura a secco; maturazione 12-24 mesi; forma cilindrica (diametro 40 cm); scalzo diritto (12-14-cm); peso medio 15-16 kg.<\/p>","Publisher":85,"Price":5,"Minqt":8,"Maxqt":100,"Quota":500,"Unit":"grammi","UnitExtra":"tagliato","Created":"2015-09-18 10:09:45","Modified":"2016-02-03 21:30:47","Expiration":null,"State":null,"totalQt":0,"prefer":null,"Tag":"lombardia, stagionato"},
 
 
 
 
 
-produttore offre
 
-la gente ok 
 
-- i moduli sono attivati di default? quindi uno si iscrive e il modulo gli viene attivato in automatico?
 
+
+Ciao Davide, 
+
+per portarsi avanti inizio ad avanzare una proposta su come ristrutturare le search, ricordando che allo stato attuale:
+
+per le ricerche delle offerte e delle preferenze ho iniziato a fare delle modifiche, ma per evitare di creare conflitto ho creato una copia di quelle finora utilizzate chiamandole searchTmp: lato javascript le search avvengono su queste, pertanto a te non e' cambiato nulla.
+
+
+In merito a quelle nuove, stavo pensando al formato che sarebbe meglio avere, ragionando sul fatto che vorrei ottenere un risultato:
+
+maneggiabile per poter svolgere qualsiasi computazione su esso
+a basso consumo di dati
+
+Visto che in generale le risposte non fanno che incollare continuamente joi tra tabelle, un formato non troppo impegnativo potrebbe essere quello di inserire nella risposta le righe selezionate dalle signole tabelle e un body contenente un riassunto delle relazioni... detto cosi' non si capisce, pertanto ti rubo del tempo illustrando un esempio concreto:
+
+
+Ammettiamo che abbia due offerte A e B, e voglia ottenere i dati dei loro publisher, le preferenze (di un gruppo ad esempio) e le offerte stesse... le tabelle sarebbero piu o meno cosi':
+
+Tabella offerte: 
+
+{"Id":29,"Name":"offerta A","Publisher":85,"description":"descrizione A", etc...}
+
+{"Id":37,"Name":"offerta B","Publisher":89,"description":"descrizione B", etc...}
+
+Tabella utenti
+
+{"Id":85,"Name":"publisherA","ExternaId":13,"company":"compagnia A", etc...}
+
+{"Id":89,"Name":"publisherB","ExternaId":17,"company":"compagnia B", etc...}
+
+
+Tabella Preferenze:
+
+
+
+
+Il formato che avevo in mente nella risposta era:
+
+{
+"response": true/false,
+"prefers": [
+    "12": {"Id":12,"UserId"85:,"offerId":"29", etc...},
+    "13": {"Id":13,"UserId":89,"offerId":"29", etc...},
+    "14": {"Id":14,"UserId":70,"offerId":"37", etc...},
+    "15": {"Id":15,"UserId":15,"offerId":"37", etc...},
+    "16": {"Id":16,"UserId":12,"offerId":"37", etc...},
+],
+"offers":[
+    "29": {"Id":29,"Name":"offerta A","Publisher":85,"description":"descrizione A", etc...},
+    "37": {"Id":37,"Name":"offerta B","Publisher":89,"description":"descrizione B", etc...}
+],
+users:[
+    "85": {"Id":85,"Name":"publisherA","ExternaId":13,"company":"compagnia A", etc...},
+    "89": {"Id":89,"Name":"publisherB","ExternaId":17,"company":"compagnia B", etc...}
+],
+
+body [
+    {"offer": [29], "prefer": [12,13]},
+    {"offer": [37], "prefer": [14,15,16]},
+]
+
+}
+
+utilizzando gli id come chiavi risulta faciee dinamicamente le join per manipolare i dati a proprio piacimento... ad esempio un loop sulle offerte puo' divenire:
+
+for(var i in body){
+    // corpo offerta
+    offerta = body[i].offer[0];
+    // publisher
+    user = offerta.UserId;
+    // le sue preferenze"
+    // loop sull'array preferenze di body[i]
+}
+
+
+probabilmente sembra macchinoso, ma credo che possa risultare piuttosto comodo qualora si debbano svolgere operazioni per il momento non contemplate.
+
+Edit: volendo si potrebbe togliere il body e appiccicare le preferenze direttamente dentro l'offerta
+
+Edit2: conoscendo le relazioni, il body potrebbe anche non essere inserito e ricavare tutte le relazioni con un semplice loop (particolamente semplice usando il metodo $.array() di jquery)
+
+
+
+Avevo intenzione di proportelo telefonicamente, ma ho pensato che un esempio completo potesse essere piu chiaro.
+
+
+Simone

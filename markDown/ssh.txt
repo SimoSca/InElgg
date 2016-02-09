@@ -1,0 +1,9 @@
+SSH
+===
+
+
+raccolto alcuni comandi utili:
+
+- se voglio mandare un file locale (windows) sul server mediante ssh:
+    `pageant C:\\Users\\black\\ProgramsConfig\\Putty\\ssh\\elgg_rsa.ppk -c pscp twilight.vim enomis@5.196.228.146:/home/enomis/.vim/colors`
+
